@@ -1,0 +1,283 @@
+/* ========================================================
+   Quran Index Page - Royal Surah Cards Styles
+   ======================================================== */
+
+.quran {
+    width: 100%;
+    min-height: 100vh;
+    padding: 30px 0 60px;
+    margin-top: 80px;
+}
+
+/* Surah Filter & Search Hero Bar */
+.surah-search-section {
+    max-width: 700px;
+    margin: 0 auto 35px;
+    text-align: center;
+}
+
+.surah-index-title {
+    font-family: 'Amiri', serif;
+    font-size: 38px;
+    font-weight: 700;
+    color: var(--gold-dark);
+    margin-bottom: 6px;
+    text-shadow: 0 1px 3px rgba(197, 164, 78, 0.25);
+}
+
+body.dark-mode .surah-index-title {
+    color: var(--gold-light);
+}
+
+.surah-index-subtitle {
+    font-size: 15px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+body.dark-mode .surah-index-subtitle {
+    color: #aaa;
+}
+
+.surah-search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px solid var(--gold-primary);
+    border-radius: 30px;
+    box-shadow: 0 6px 20px var(--gold-shadow);
+    padding: 4px 18px;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .surah-search-box {
+    background: rgba(25, 29, 36, 0.9);
+    border-color: var(--gold-dark);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5);
+}
+
+.surah-search-box:focus-within {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(197, 164, 78, 0.35);
+    border-color: var(--gold-light);
+}
+
+.surah-search-box i {
+    font-size: 16px;
+    color: var(--gold-primary);
+    margin-left: 10px;
+}
+
+.surah-search-input {
+    width: 100%;
+    height: 44px;
+    border: none;
+    background: transparent;
+    font-family: 'Cairo', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--DeepBlack);
+    outline: none;
+}
+
+body.dark-mode .surah-search-input {
+    color: #fff;
+}
+
+/* ========================================================
+   ROYAL SURAH CARDS
+   ======================================================== */
+.surah-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 243, 233, 0.95));
+    border: 1px solid var(--gold-border);
+    border-radius: 16px;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Gold shimmer on hover */
+.surah-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(197, 164, 78, 0.12), rgba(232, 212, 139, 0.02));
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    z-index: 1;
+}
+
+.surah-card:hover {
+    transform: translateY(-5px);
+    box-shadow:
+        0 12px 30px rgba(197, 164, 78, 0.22),
+        0 0 0 1px var(--gold-primary);
+    border-color: var(--gold-primary);
+}
+
+.surah-card:hover::before {
+    opacity: 1;
+}
+
+/* Surah Number Medallion */
+.surah-number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, rgba(197, 164, 78, 0.15), rgba(232, 212, 139, 0.25));
+    border: 1px solid var(--gold-primary);
+    color: var(--gold-dark);
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 1.15rem;
+    font-family: 'Amiri', serif;
+    box-shadow: 0 2px 8px var(--gold-shadow);
+    flex-shrink: 0;
+    position: relative;
+    z-index: 2;
+    transition: all 0.3s ease;
+}
+
+.surah-card:hover .surah-number {
+    background: linear-gradient(135deg, var(--gold-primary), var(--gold-light));
+    color: #2b1f06;
+    transform: scale(1.08);
+}
+
+/* Surah Body */
+.surah-body {
+    text-align: center;
+    padding: 6px 12px;
+    flex: 1;
+    position: relative;
+    z-index: 2;
+}
+
+.surah-name {
+    font-family: 'Amiri', serif;
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: #3b2804;
+    margin-bottom: 4px;
+    transition: color 0.25s ease;
+}
+
+.surah-card:hover .surah-name {
+    color: var(--gold-dark);
+}
+
+.surah-ayat {
+    color: #777;
+    font-size: 0.95rem;
+    margin: 0;
+    font-weight: 600;
+}
+
+/* Surah Type Badge (Makki / Madani) */
+.surah-type {
+    font-size: 0.85rem;
+    padding: 4px 12px;
+    height: max-content;
+    border-radius: 20px;
+    font-weight: 700;
+    position: relative;
+    z-index: 2;
+    white-space: nowrap;
+}
+
+.surah-type.makki {
+    background-color: rgba(197, 164, 78, 0.15);
+    color: #9c7b2c;
+    border: 1px solid rgba(197, 164, 78, 0.35);
+}
+
+.surah-type.madani {
+    background-color: rgba(46, 125, 50, 0.12);
+    color: #2e7d32;
+    border: 1px solid rgba(46, 125, 50, 0.3);
+}
+
+/* ========================================================
+   DARK MODE
+   ======================================================== */
+body.dark-mode .surah-card {
+    background: linear-gradient(135deg, rgba(22, 26, 33, 0.95), rgba(17, 20, 26, 0.95));
+    border-color: rgba(197, 164, 78, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .surah-card:hover {
+    border-color: var(--gold-light);
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.6),
+        0 0 0 1px var(--gold-light);
+}
+
+body.dark-mode .surah-name {
+    color: #f7e6b0;
+}
+
+body.dark-mode .surah-card:hover .surah-name {
+    color: var(--gold-light);
+}
+
+body.dark-mode .surah-ayat {
+    color: #aaa;
+}
+
+body.dark-mode .surah-number {
+    background: rgba(139, 105, 20, 0.25);
+    border-color: var(--gold-light);
+    color: var(--gold-light);
+}
+
+body.dark-mode .surah-type.makki {
+    background-color: rgba(197, 164, 78, 0.18);
+    color: #e8d48b;
+    border-color: rgba(197, 164, 78, 0.35);
+}
+
+body.dark-mode .surah-type.madani {
+    background-color: rgba(76, 175, 80, 0.15);
+    color: #81c784;
+    border-color: rgba(76, 175, 80, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .quran {
+        margin-top: 65px;
+        padding: 20px 0 80px;
+    }
+
+    .surah-index-title {
+        font-size: 30px;
+    }
+
+    .surah-card {
+        padding: 12px 16px;
+    }
+
+    .surah-name {
+        font-size: 1.6rem;
+    }
+
+    .surah-number {
+        width: 38px;
+        height: 38px;
+        font-size: 1rem;
+    }
+}

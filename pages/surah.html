@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Amiri+Quran&family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="icon" href="../images/logo.png">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/surah.css">
+    <title>القرآن الكريم</title>
+</head>
+
+<body>
+
+    <!-- ==============================================
+         TOP NAVIGATION & CONTROLS HEADER
+         ============================================== -->
+    <!-- ==============================================
+         TOP NAVIGATION & CONTROLS HEADER (منظم ومتجاوب بالكامل)
+         ============================================== -->
+    <header class="surah-navbar">
+        <div class="nav-container">
+            <!-- Row 1: Primary Navigation Bar -->
+            <div class="nav-primary-row">
+                <!-- Right Group (RTL): Back to Index & Surah Stepper -->
+                <div class="nav-group nav-right">
+                    <a href="quraan.html" class="nav-btn nav-back-btn" title="الرجوع إلى قائمة السور">
+                        <i class="fa-solid fa-arrow-right"></i>
+                        <span class="btn-text">الفهرس</span>
+                    </a>
+                    <div class="surah-stepper">
+                        <button class="nav-btn stepper-btn" id="nextBtn" title="السورة التالية">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                        <button class="nav-btn stepper-btn" id="prevBtn" title="السورة السابقة">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Center Group: Surah Title Chip -->
+                <div class="nav-group nav-center">
+                    <div class="surah-pill-chip" id="surahPillChip" title="السورة الحالية">
+                        <i class="fa-solid fa-book-quran"></i>
+                        <span id="navSurahName">جاري التحميل...</span>
+                    </div>
+                </div>
+
+                <!-- Left Group (Primary Actions: View Toggle + Theme Toggle) -->
+                <div class="nav-group nav-left-actions">
+                    <button class="view-toggle-btn" id="viewToggleBtn" title="التبديل بين قراءة النص وتصفح صفحات المصحف">
+                        <i class="fa-solid fa-image"></i>
+                        <span class="toggle-text">صفحات المصحف</span>
+                    </button>
+
+                    <!-- Dark / Light Mode Toggle (Always Visible in Header) -->
+                    <button class="nav-btn theme-btn" id="themeToggleBtn" title="تبديل الوضع الليلي / النهاري">
+                        <i class="fa-solid fa-moon" id="themeIcon"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Row 2: Secondary Tools Toolbar (Search, Sheikh Reciters Audio, Font Size) -->
+            <div class="nav-tools-row" id="navToolsRow">
+                <!-- Search in Ayahs (For text view) -->
+                <div class="nav-search-wrapper" id="searchWrapper">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="search" id="ayahSearchInput" class="nav-search-input" placeholder="ابحث في الآيات...">
+                    <button type="button" id="searchClearBtn" class="search-clear-btn" title="مسح البحث">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <!-- Reciters Audio Player Toggle Button -->
+                <button class="nav-btn audio-toggle-btn" id="audioToggleBtn" title="الاستماع لتلاوة السورة بصوت المشايخ">
+                    <i class="fa-solid fa-headphones"></i>
+                    <span class="btn-text">الاستماع</span>
+                </button>
+
+                <button class="nav-btn" id="openTafsirBtn" title="فتح تفسير السورة">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span class="btn-text">تفسير</span>
+                </button>              
+
+                <!-- Font Size Controls (For text view) -->
+                <div class="font-size-group" id="fontSizeGroup" title="حجم الخط">
+                    <button class="nav-btn font-btn" id="fontIncreaseBtn" title="تكبير الخط">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
+                    <span class="font-indicator"><i class="fa-solid fa-font"></i></span>
+                    <button class="nav-btn font-btn" id="fontDecreaseBtn" title="تصغير الخط">
+                        <i class="fa-solid fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==============================================
+         RECITERS AUDIO PLAYER BAR (مشغل تلاوة القارئ)
+         ============================================== -->
+    <div class="surah-audio-player" id="surahAudioPlayer">
+        <div class="audio-container">
+            <!-- Reciter Selection Dropdown & Search -->
+            <div class="reciter-selector-wrap">
+                <i class="fa-solid fa-microphone-lines reciter-icon" id="reciterIcon"></i>
+                <select id="reciterSelect" class="reciter-select" title="اختر القارئ">
+                    <option value="" disabled selected>جاري تحميل قائمة القراء...</option>
+                </select>
+                <input type="search" id="reciterSearchInput" class="reciter-search-input" placeholder="ابحث عن قارئ..." style="display: none;">
+                <button type="button" class="reciter-search-toggle-btn" id="reciterSearchToggleBtn" title="بحث سريع في قائمة القراء">
+                    <i class="fa-solid fa-magnifying-glass" id="reciterSearchIcon"></i>
+                </button>
+            </div>
+
+            <!-- Playback Controls & Progress Bar -->
+            <div class="audio-controls-wrap">
+                <button class="audio-play-btn" id="audioPlayBtn" title="تشغيل / إيقاف مؤقت">
+                    <i class="fa-solid fa-play" id="audioPlayIcon"></i>
+                </button>
+                <div class="audio-time-wrap">
+                    <span id="audioCurrentTime" class="time-text">00:00</span>
+                    <div class="audio-progress-bar" id="audioProgressBar">
+                        <div class="audio-progress-fill" id="audioProgressFill"></div>
+                    </div>
+                    <span id="audioDuration" class="time-text">00:00</span>
+                </div>
+            </div>
+
+            <!-- Volume & Close Controls -->
+            <div class="audio-actions-wrap">
+                <button class="audio-mini-btn" id="audioMuteBtn" title="كتم / تفعيل الصوت">
+                    <i class="fa-solid fa-volume-high" id="audioMuteIcon"></i>
+                </button>
+                <input type="range" id="audioVolumeSlider" class="volume-slider" min="0" max="1" step="0.05" value="1" title="مستوى الصوت">
+                <button class="audio-close-btn" id="audioCloseBtn" title="إغلاق المشغل">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Audio Status / Availability Notice -->
+        <div id="audioStatusNotice" class="audio-status-notice" style="display: none;">
+            <i class="fa-solid fa-circle-exclamation"></i>
+            <span id="audioStatusNoticeText"></span>
+        </div>
+    </div>
+
+    <!-- Tafseer -->
+    <section class="tafseer-section" id="tafseerSection" hidden aria-labelledby="tafseerTitle" aria-hidden="true">
+        <div class="tafseer-header">
+            <div class="tafseer-heading">
+                <span class="tafseer-heading-icon"><i class="fa-solid fa-book-open"></i></span>
+                <div>
+                    <span class="section-kicker">إضاءات من كلام أهل العلم</span>
+                    <h2 id="tafseerTitle">تفسير السورة</h2>
+                </div>
+            </div>
+            <button class="tafseer-close-btn" id="closeTafsirBtn" type="button" title="إغلاق التفسير">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="tafseer-divider" aria-hidden="true"><span>۞</span></div>
+        <div class="tafseer-text" id="tafseer-text" aria-live="polite"></div>
+    </section>
+
+    <!-- Hidden native audio element -->
+    <audio id="quranAudio" preload="none"></audio>
+
+    <!-- ==============================================
+         TEXT VIEW WITH ROYAL SURAH FRAME
+         ============================================== -->
+    <div class="ayat" id="textView">
+        <div class="quran-page-frame">
+            <!-- Corner Ornaments (Desktop only) -->
+            <div class="corner-ornament top-right"></div>
+            <div class="corner-ornament top-left"></div>
+            <div class="corner-ornament bottom-right"></div>
+            <div class="corner-ornament bottom-left"></div>
+
+            <!-- Royal Surah Header Banner -->
+            <div class="surah-header-banner">
+                <div class="banner-outer-frame">
+                    <!-- Top Arch Ornament -->
+                    <div class="banner-arch-crown">
+                        <span class="crown-flourish">❖</span>
+                        <span class="crown-line"></span>
+                        <span class="crown-gem">✦</span>
+                        <span class="crown-line"></span>
+                        <span class="crown-flourish">❖</span>
+                    </div>
+
+                    <!-- Banner Body (3 Sections) -->
+                    <div class="banner-body">
+                        <!-- Right Badge: Revelation Type -->
+                        <div class="surah-badge-meta meta-right">
+                            <span class="badge-title">مكان النزول</span>
+                            <span class="badge-value" id="surahType">
+                                <i class="fa-solid fa-kaaba"></i> مكية
+                            </span>
+                        </div>
+
+                        <!-- Center: Surah Title & Order -->
+                        <div class="surah-badge-center">
+                            <div class="title-frame-ornament">
+                                <span class="title-wing-right">❧</span>
+                                <h1 class="surah-title" id="surahTitle">سورة الفاتحة</h1>
+                                <span class="title-wing-left">☙</span>
+                            </div>
+                            <div class="surah-order-badge" id="surahOrder">ترتيبها: ١</div>
+                        </div>
+
+                        <!-- Left Badge: Ayat Count -->
+                        <div class="surah-badge-meta meta-left">
+                            <span class="badge-title">عدد الآيات</span>
+                            <span class="badge-value" id="surahAyatCount">
+                                <i class="fa-solid fa-feather-pointed"></i> ٧ آيات
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Arch Accent -->
+                    <div class="banner-bottom-accent">
+                        <span class="accent-line"></span>
+                        <span class="accent-star">۞</span>
+                        <span class="accent-line"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bismillah Section -->
+            <div class="bismillah-wrapper" id="bismillahContainer">
+                <div class="bismillah-divider">
+                    <span class="divider-line"></span>
+                    <span class="divider-ornament">✤</span>
+                    <span class="divider-line"></span>
+                </div>
+                <div class="bismillah-calligraphy" id="bismillah">
+                    بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
+                </div>
+                <div class="bismillah-divider">
+                    <span class="divider-line"></span>
+                    <span class="divider-ornament">✤</span>
+                    <span class="divider-line"></span>
+                </div>
+            </div>
+
+            <!-- Search Result Stats Chip -->
+            <div id="searchStats" class="search-stats-chip" style="display: none;"></div>
+
+            <!-- Ayat Content Area -->
+            <div id="ayat-text"></div>
+
+            <!-- Surah Bottom Ornament & Conclusion -->
+            <div class="surah-footer-ornament">
+                <div class="ornamental-divider">
+                    <span class="line"></span>
+                    <span class="diamond">۞ صَدَقَ اللَّهُ الْعَظِيمُ ۞</span>
+                    <span class="line"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==============================================
+         PAGE IMAGE VIEW (صفحات المصحف الشريف - شاشة كاملة بدون تمرير)
+         ============================================== -->
+    <div class="page-image-view" id="pageImageView">
+        <!-- Side Navigation Button: Right (Next Page - يمين يجيب الصفحة التالية) -->
+        <button class="side-nav-btn side-next" id="sideNextBtn" title="الصفحة التالية (أو اسحب يميناً)">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+        <!-- Main Stage Container (Responsive viewport fit with swipe gestures) -->
+        <div class="page-stage" id="pageStage">
+            <div class="page-image-frame" id="pageImageFrame">
+                <div class="page-loading" id="pageLoading">
+                    <div class="spinner"></div>
+                    <span class="loading-label">جاري تحميل صفحة المصحف...</span>
+                </div>
+                <img id="pageImage" src="" alt="صفحة من المصحف الشريف" draggable="false" style="display: none;">
+            </div>
+
+            <!-- Floating Bottom Page Control Bar -->
+            <div class="page-floating-nav" id="pageNav">
+                <button class="nav-arrow-btn" id="pageNextBtn" title="الصفحة التالية (سحب يمين)">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+                <div class="page-jump-chip">
+                    <span class="page-label">صفحة</span>
+                    <input type="number" class="page-jump-input" id="pageJumpInput" min="1" max="604" value="1">
+                    <span class="page-total">من ٦٠٤</span>
+                </div>
+                <button class="nav-arrow-btn" id="pagePrevBtn" title="الصفحة السابقة (سحب شمال)">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Side Navigation Button: Left (Previous Page - شمال يجيب الصفحة السابقة) -->
+        <button class="side-nav-btn side-prev" id="sidePrevBtn" title="الصفحة السابقة (أو اسحب يساراً)">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+    </div>
+
+    <script src="../js/surah.js"></script>
+</body>
+
+</html>
